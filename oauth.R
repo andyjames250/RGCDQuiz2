@@ -19,4 +19,10 @@ github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
 req <- GET("https://api.github.com/users/jtleek/repos", config(token = github_token))
 stop_for_status(req)
 x <- content(req)
-x[[5]]$created_at
+created_at <- NULL
+for(i in x) {
+        if(i$name == "datasharing") {
+                created_at <- i$created_at
+                break
+        }
+}
